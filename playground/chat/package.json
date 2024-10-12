@@ -4,6 +4,18 @@
     "description": "Customizable chat interface component",
     "main": "dist/index.esm.js",
     "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.esm.js",
+            "require": "./dist/index.cjs.js"
+        }
+    },
+    "files": [  
+        "dist",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
     "scripts": {
         "dev": "vite",
         "build": "rollup -c",

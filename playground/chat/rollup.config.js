@@ -7,7 +7,7 @@ export default {
   output: [
     {
       file: 'dist/index.esm.js',
-      format: 'esm',
+      format: 'esm'
     }
   ],
   plugins: [resolve(), typescript(), postcss()],
