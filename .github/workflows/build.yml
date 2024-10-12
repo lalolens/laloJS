@@ -47,10 +47,9 @@ jobs:
           git ls-files | xargs rm -rf
 
           # Copy necessary build artifacts from the checked-out main branch
-          cp -r playground/chat/dist/* .
-          cp playground/chat/package.json .
-          cp playground/chat/README.md .
-          cp playground/chat/LICENSE LICENSE || true  # Optional LICENSE
+          cp -r dist/* .
+          cp /package.json .
+          cp /README.md .
 
           # Commit and push the changes to the build branch
           git add .
