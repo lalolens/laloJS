@@ -44,7 +44,7 @@ jobs:
           git checkout build || git checkout --orphan build
 
           # Remove old files from the branch while keeping .git directory intact
-          git ls-files | xargs rm -rf
+          # git ls-files | xargs rm -rf
 
           # Copy necessary build artifacts from the checked-out main branch
           cp -r dist/* .
