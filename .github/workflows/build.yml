@@ -49,6 +49,7 @@ jobs:
           mkdir -p build_artifacts
 
           # Copy necessary build artifacts from the checked-out main branch
+          echo "seeing playground ..."
           ls -alt playground/chat
           cp -r playground/chat/dist/* build_artifacts/
           cp playground/chat/package.json build_artifacts/
