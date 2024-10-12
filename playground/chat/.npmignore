@@ -1,0 +1,16 @@
+# Exclude everything except dist and essential files
+src/
+node_modules/
+*.config.js
+tsconfig.json
+rollup.config.js
+vite.config.js
+.vscode/
+
+# Keep dist and essential files
+!.gitignore
+!.npmignore
+!dist/
+!package.json
+!README.md
+!LICENSE
