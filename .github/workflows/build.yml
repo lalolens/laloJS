@@ -49,7 +49,7 @@ jobs:
           git ls-files | xargs rm -rf
 
           # Copy necessary build artifacts from the checked-out main branch
-          cp -r playground/chat/dist/* .
+          cp -r dist/* .
           cp playground/chat/package.json .
           cp playground/chat/README.md .
           cp playground/chat/LICENSE LICENSE || true  # Optional LICENSE
