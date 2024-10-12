@@ -58,7 +58,7 @@ jobs:
           git add .
           if [ -n "$(git status --porcelain)" ]; then
             git commit -m "Deploy build"
-            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/lalolens/laloJS.git
+            git remote set-url origin https://x-access-token:${secrets.GITHUB_TOKEN}@github.com/lalolens/laloJS.git
             git push --force origin build
           else
             echo "No changes to deploy"
