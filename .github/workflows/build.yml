@@ -23,21 +23,29 @@ jobs:
         with:
           node-version: '18'  # You can specify the Node.js version here
 
-      # Step 3: Install dependencies
+      # Step 3: Navigate to the `playground/chat` directory
+      - name: Change directory to chat
+        working-directory: playground/chat
+        run: echo "Moved to playground/chat directory"
+
+      # Step 4: Install dependencies
       - name: Install dependencies
+        working-directory: playground/chat
         run: npm install
 
-      # Step 4: Build the package
+      # Step 5: Build the package
       - name: Build the package
+        working-directory: playground/chat
         run: npm run build
 
-      # Step 5: Deploy the dist folder to the build branch
+      # Step 6: Deploy the `dist` folder to the build branch
       - name: Deploy to build branch
+        working-directory: playground/chat
         run: |
           git config --global user.email "elaloglens@gmail.com"
           git config --global user.name "Lalolens"
           git checkout -b build
-          git add playground/chat/dist/ playground/chat/package.json playground/chat/README.md 
+          git add dist/ package.json playground/chat/README.md
           git commit -m "Deploy build"
           git push --force --set-upstream origin build
         env:
