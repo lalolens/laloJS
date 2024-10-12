@@ -34,8 +34,8 @@ jobs:
       # Step 5: Deploy the dist folder to the build branch
       - name: Deploy to build branch
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "elaloglens@gmail.com"
+          git config --global user.name "Lalolens"
           git checkout -b build
           git add dist/ package.json README.md LICENSE
           git commit -m "Deploy build"
