@@ -79,6 +79,6 @@ jobs:
 
             #   # Push changes to the build branch
             #   git push --force-with-lease origin build
-            # else
-            #   echo "No changes to deploy"
-            # fi
+          else
+            echo "No changes to deploy"
+          fi
