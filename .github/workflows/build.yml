@@ -36,7 +36,7 @@ jobs:
       # Step 5: Deploy the `dist` folder to the `build` branch
       - name: Deploy to build branch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --global user.email "elaloglens@gmail.com"
           git config --global user.name "Lalolens"
@@ -52,7 +52,7 @@ jobs:
           cp -r playground/chat/dist/* build_artifacts/
           cp playground/chat/package.json build_artifacts/
           cp playground/chat/README.md build_artifacts/
-          # cp playground/chat/LICENSE build_artifacts/LICENSE || true  # Optional LICENSE
+          cp playground/chat/LICENSE build_artifacts/LICENSE || true  # Optional LICENSE
 
           # Remove old files from the branch while keeping .git directory and build_artifacts
           find . -mindepth 1 -maxdepth 1 ! -name ".git" ! -name "build_artifacts" -exec rm -rf {} +
@@ -69,19 +69,9 @@ jobs:
           git add -A
           if [ -n "$(git status --porcelain)" ]; then
             git commit -m "Deploy build"
-            
-            # Set up remote with GITHUB_TOKEN for authentication
-            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/lalolens/laloJS.git
 
-            # Debugging: Show the remote URL and verify push access
-            echo "Pushing to remote URL:"
-            git remote -v
-
-            #   # Push changes to the build branch
-            # git push --force-with-lease origin build
-            # git push --force-with-lease https://x-access-token:${ACCESS_TOKEN}@github.com/lalolens/laloJS.git build
-            git push --force-with-lease https://<ACCESS_TOKEN>:x-oauth-basic@github.com/lalolens/laloJS.git build
-
+            # Use PAT directly for pushing changes to the build branch
+            git push --force-with-lease https://x-access-token:${ACCESS_TOKEN}@github.com/lalolens/laloJS.git HEAD:build
           else
             echo "No changes to deploy"
           fi
