@@ -49,6 +49,7 @@ jobs:
           mkdir -p build_artifacts
 
           # Copy necessary build artifacts from the checked-out main branch
+          la -alt
           cp -r playground/chat/dist/* build_artifacts/
           cp playground/chat/package.json build_artifacts/
           cp playground/chat/README.md build_artifacts/
