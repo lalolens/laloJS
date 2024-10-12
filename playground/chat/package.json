@@ -2,12 +2,12 @@
     "name": "@lalolens/chat",
     "version": "1.0.0",
     "description": "Customizable chat interface component",
-    "main": "dist/index.esm.js",
+    "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/index.esm.js",
-            "require": "./dist/index.cjs.js"
+            "import": "./dist/index.js",
+            "require": "./dist/index.js"
         }
     },
     "files": [  
