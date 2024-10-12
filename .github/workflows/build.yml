@@ -45,7 +45,7 @@ jobs:
           git config --global user.email "elaloglens@gmail.com"
           git config --global user.name "Lalolens"
           git checkout -b build
-          git add dist/ package.json playground/chat/README.md
+          git add dist/ package.json README.md
           git commit -m "Deploy build"
           git push --force --set-upstream origin build
         env:
