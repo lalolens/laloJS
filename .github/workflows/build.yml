@@ -44,9 +44,20 @@ jobs:
         run: |
           git config --global user.email "elaloglens@gmail.com"
           git config --global user.name "Lalolens"
-          git checkout -b build
-          git add dist/ package.json README.md
-          git commit -m "Deploy build"
-          git push --force --set-upstream origin build
+          git checkout --orphan build  # Create a new branch detached from history
+          git reset --hard  # Clear all current files from the working tree
+          # Copy required files to root for the build branch
+          mkdir -p dist
+          cp -r playground/chat/dist/* dist/
+          cp playground/chat/package.json package.json
+          cp playground/chat/README.md README.md
+          cp playground/chat/LICENSE LICENSE
+          git add .
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Deploy build"
+            git push --force --set-upstream origin build
+          else
+            echo "No changes to deploy"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
