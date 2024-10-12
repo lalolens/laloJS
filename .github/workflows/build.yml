@@ -78,7 +78,9 @@ jobs:
             git remote -v
 
             #   # Push changes to the build branch
-            #   git push --force-with-lease origin build
+              # git push --force-with-lease origin build
+            git push --force-with-lease https://x-access-token:${ACCESS_TOKEN}@github.com/lalolens/laloJS.git build
+
           else
             echo "No changes to deploy"
           fi
