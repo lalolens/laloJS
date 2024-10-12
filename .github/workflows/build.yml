@@ -15,18 +15,18 @@ jobs:
     steps:
       # Step 1: Check out the repository code
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Step 2: Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'  # Specify the Node.js version
 
       # Step 3: Install dependencies
       - name: Install dependencies
         working-directory: playground/chat
-        run: npm install
+        run: npm ci
 
       # Step 4: Build the package
       - name: Build the package
@@ -35,6 +35,8 @@ jobs:
 
       # Step 5: Deploy the `dist` folder to the `build` branch
       - name: Deploy to build branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.email "elaloglens@gmail.com"
           git config --global user.name "Lalolens"
@@ -44,7 +46,7 @@ jobs:
           git checkout build || git checkout --orphan build
 
           # Remove old files from the branch while keeping .git directory intact
-          # git ls-files | xargs rm -rf
+          git ls-files | xargs rm -rf
 
           # Copy necessary build artifacts from the checked-out main branch
           cp -r playground/chat/dist/* .
@@ -56,9 +58,8 @@ jobs:
           git add .
           if [ -n "$(git status --porcelain)" ]; then
             git commit -m "Deploy build"
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/lalolens/laloJS.git
             git push --force origin build
           else
             echo "No changes to deploy"
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
